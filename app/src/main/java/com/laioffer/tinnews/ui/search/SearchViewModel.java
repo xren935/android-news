@@ -21,6 +21,6 @@ public class SearchViewModel extends ViewModel {
     }
 
     public LiveData<NewsResponse> searchNews() {
-        return Transformations.switchMap(searchInput, repository::searchNews);
+        return Transformations.switchMap(searchInput, country -> repository.getTopHeadlines(country));
     }
 }

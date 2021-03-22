@@ -16,8 +16,10 @@ import retrofit2.Response;
 public class NewsRepository {
 
     private final NewsApi newsApi;
+//    private final TinNewsDatabase database;
 
-    public NewsRepository(Context context) {
+
+    public NewsRepository() {
         newsApi = RetrofitClient.newInstance().create(NewsApi.class);
     }
 
@@ -40,5 +42,27 @@ public class NewsRepository {
                     }
                 });
         return topHeadlinesLiveData;
+    }
+
+    public LiveData<NewsResponse> searchNews(String query) {
+        MutableLiveData<NewsResponse> everyThingLiveData = new MutableLiveData<>();
+        newsApi.getEverything(query, 40)
+                .enqueue(
+                        new Callback<NewsResponse>() {
+                            @Override
+                            public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
+                                if (response.isSuccessful()) {
+                                    everyThingLiveData.setValue(response.body());
+                                } else {
+                                    everyThingLiveData.setValue(null);
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<NewsResponse> call, Throwable t) {
+                                everyThingLiveData.setValue(null);
+                            }
+                        });
+        return everyThingLiveData;
     }
 }
