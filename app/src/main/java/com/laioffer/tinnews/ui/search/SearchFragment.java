@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,6 +42,15 @@ public class SearchFragment extends Fragment {
         //search view
         // NewsRepository repository = new NewsRepository(getContext());
         // viewModel = new ViewModelProvider(this, new NewsViewModelFactory(repository)).get(SearchViewModel.class);
+        super.onViewCreated(view, savedInstanceState);
+        SearchNewsAdapter newsAdapter = new SearchNewsAdapter();
+        // change to 1 3 to update layout ? // Pinterest masonry grid
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 2);
+
+        // init set up / set layout
+        binding.newsResultsRecyclerView.setLayoutManager(gridLayoutManager);
+
+        binding.newsResultsRecyclerView.setAdapter(newsAdapter);
 
         super.onViewCreated(view, savedInstanceState);
         binding.newsSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -69,7 +79,8 @@ public class SearchFragment extends Fragment {
                         getViewLifecycleOwner(),
                         newsResponse -> {
                             if (newsResponse != null) {
-                                Log.d("SearchFragment", newsResponse.toString());
+                                newsAdapter.setArticles(newsResponse.articles);
+                                // Log.d("SearchFragment", newsResponse.toString());
                             }
                         });
     }
