@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.laioffer.tinnews.R;
+import com.laioffer.tinnews.R; // android resource lookup
 
 public class CardSwipeAdapter extends RecyclerView.Adapter<CardSwipeAdapter.CardSwipeViewHolder> {
     // Supporting data:
