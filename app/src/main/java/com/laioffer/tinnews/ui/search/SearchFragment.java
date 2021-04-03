@@ -1,7 +1,9 @@
 package com.laioffer.tinnews.ui.search;
-import androidx.appcompat.widget.SearchView; // for the search
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,12 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.laioffer.tinnews.R;
 import com.laioffer.tinnews.databinding.FragmentSearchBinding;
 import com.laioffer.tinnews.repository.NewsRepository;
 import com.laioffer.tinnews.repository.NewsViewModelFactory;
@@ -40,8 +36,8 @@ public class SearchFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         //search view
-        // NewsRepository repository = new NewsRepository(getContext());
-        // viewModel = new ViewModelProvider(this, new NewsViewModelFactory(repository)).get(SearchViewModel.class);
+        NewsRepository repository = new NewsRepository(getContext());
+        viewModel = new ViewModelProvider(this, new NewsViewModelFactory(repository)).get(SearchViewModel.class);
         super.onViewCreated(view, savedInstanceState);
         SearchNewsAdapter newsAdapter = new SearchNewsAdapter();
         // change to 1 3 to update layout ? // Pinterest masonry grid
@@ -69,9 +65,9 @@ public class SearchFragment extends Fragment {
             }
         });
 
-        NewsRepository repository = new NewsRepository();
-        viewModel = new ViewModelProvider(this, new NewsViewModelFactory(repository))
-                .get(SearchViewModel.class);
+//        NewsRepository repository = new NewsRepository(getContext());
+//        viewModel = new ViewModelProvider(this, new NewsViewModelFactory(repository))
+//                .get(SearchViewModel.class);
         // viewModel.setSearchInput("Covid-19");
         viewModel
                 .searchNews()

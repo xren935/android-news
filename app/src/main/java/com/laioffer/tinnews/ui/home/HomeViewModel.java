@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
+import com.laioffer.tinnews.model.Article;
 import com.laioffer.tinnews.model.NewsResponse;
 import com.laioffer.tinnews.repository.NewsRepository;
 
@@ -33,5 +34,9 @@ public class HomeViewModel extends ViewModel {
 //                return repository.getTopHeadlines(country); // from homeFragment we get 'us'
 //            }
 //        });
+    }
+
+    public void setFavoriteArticleInput(Article article) {
+        repository.favoriteArticle(article);
     }
 }

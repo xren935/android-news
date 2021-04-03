@@ -61,7 +61,7 @@ public class HomeFragment extends Fragment implements CardStackListener {
         binding.homeLikeButton.setOnClickListener(v -> swipeCard(Direction.Right));
         binding.homeUnlikeButton.setOnClickListener(v -> swipeCard(Direction.Left));
 
-        NewsRepository repository = new NewsRepository();
+        NewsRepository repository = new NewsRepository(getContext());
         // ViewModelProvider cache old data so we don't new to create new ones that are already there
         // helps to retain history
         // viewModel = new HomeView(repository);
@@ -105,6 +105,8 @@ public class HomeFragment extends Fragment implements CardStackListener {
             Log.d("CardStackView", "unliked " + layoutManager.getTopPosition());
         } else if (direction == Direction.Right) {
             Log.d("CardStackView", "liked "  + layoutManager.getTopPosition());
+            Article article = articles.get(layoutManager.getTopPosition() -1);
+            viewModel.setFavoriteArticleInput(article);
         }
     }
 

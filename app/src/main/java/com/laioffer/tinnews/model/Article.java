@@ -16,6 +16,7 @@ public class Article {
     public String description;
     public String publishedAt;
     public String title;
+
     @NonNull
     @PrimaryKey
     public String url;
