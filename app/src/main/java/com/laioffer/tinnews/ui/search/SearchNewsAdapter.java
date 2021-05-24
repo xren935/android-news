@@ -22,6 +22,16 @@ public class SearchNewsAdapter extends RecyclerView.Adapter<SearchNewsAdapter.Se
     // TODO: supporting data
     private List<Article> articles = new ArrayList<>();
 
+    interface ItemCallback {
+        void onOpenDetails(Article article);
+    }
+
+    private ItemCallback itemCallback;
+
+    public void setItemCallback(ItemCallback itemCallback) {
+        this.itemCallback = itemCallback;
+    }
+
     public void setArticles(List<Article> newsList) {
         // refresh
         articles.clear();
@@ -46,6 +56,8 @@ public class SearchNewsAdapter extends RecyclerView.Adapter<SearchNewsAdapter.Se
         holder.itemTitleTextView.setText(article.title);
         // use Picasso to load the pics
         Picasso.get().load(article.urlToImage).into(holder.itemImageView);
+        // inform the implementer the onOpenDetails event when an item is clicked
+        holder.itemView.setOnClickListener(v -> itemCallback.onOpenDetails(article));
     }
 
     @Override

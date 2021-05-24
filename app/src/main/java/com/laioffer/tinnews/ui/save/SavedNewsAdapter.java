@@ -23,6 +23,7 @@ public class SavedNewsAdapter extends RecyclerView.Adapter<SavedNewsAdapter.Save
         void onOpenDetails(Article article);
         void onRemoveFavorite(Article article); // removes from saved when the heart icon is clicked
     }
+
     private ItemCallback itemCallback;
 
     public void setItemCallback(ItemCallback itemCallback) {
@@ -52,6 +53,8 @@ public class SavedNewsAdapter extends RecyclerView.Adapter<SavedNewsAdapter.Save
         holder.descriptionTextView.setText(article.description);
 
         holder.favoriteIcon.setOnClickListener(v -> itemCallback.onRemoveFavorite(article));
+        holder.itemView.setOnClickListener(v -> itemCallback.onOpenDetails(article));
+
         holder.itemView.setOnClickListener(v -> itemCallback.onOpenDetails(article));
     }
 
