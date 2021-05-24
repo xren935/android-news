@@ -84,10 +84,10 @@ public class SaveFragment extends Fragment {
             }
         });
 
-        savedNewsAdapter.setItemCallback(article -> {
-            SearchFragmentDirections.ActionNavigationSearchToNavigationDetails direction = SearchFragmentDirections.actionNavigationSearchToNavigationDetails(article);
-            NavHostFragment.findNavController(SearchFragment).navigate(direction);
-        });
+//        savedNewsAdapter.setItemCallback(article -> {
+//            SearchFragmentDirections.ActionNavigationSearchToNavigationDetails direction = SearchFragmentDirections.actionNavigationSearchToNavigationDetails(article);
+//            NavHostFragment.findNavController(SearchFragment).navigate(direction);
+//        });
     }
 
     /**
